@@ -1,0 +1,1 @@
+Código para identificar a identificação hexadecimal de cada botão exibindo-o do display serial.
