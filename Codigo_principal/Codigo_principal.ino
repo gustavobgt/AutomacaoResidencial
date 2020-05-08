@@ -18,7 +18,7 @@ void setup()
   digitalWrite(RELE_2,LOW);
   
   Serial.begin(9600);
-  irrecv.enableIRIn(); //Start the receiver
+  irrecv.enableIRIn(); //Inicia o receptor
 }
 
 
@@ -65,9 +65,6 @@ void loop() {
     delay(500);
     
     results.value = 0;
-    /*precisa receber 0 se não o valor do resultado se manterá 
-     o mesmo até a proxima leitura fazendo com que entre no 
-     outro "if" e desligue o RELE*/
   }
 
   if(results.value == 268603503 && estado_R2 == 1)
