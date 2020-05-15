@@ -6,18 +6,26 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
 
 public class MainApp extends Application {
 
+    private Stage stage;
+
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage PrimaryStage) throws Exception {
+        stage = PrimaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
         
+        //Image img = new Image("/Images/Background.jpg");
+        //ImageView background = new ImageView(img);
+
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/styles/Styles.css");
-        
-        stage.setTitle("JavaFX and Maven");
+
+        stage.setTitle("Automação residencial");
         stage.setScene(scene);
         stage.show();
     }
