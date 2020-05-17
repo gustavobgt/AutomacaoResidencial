@@ -39,6 +39,7 @@ public class FXMLController implements Initializable {
         imgBtnRelay1.setImage(imgOFF);
         btnRelay1Pressed = false;
       }else{
+
         btnRelay1Pressed = true;
         imgBtnRelay1.setImage(imgON);
 
