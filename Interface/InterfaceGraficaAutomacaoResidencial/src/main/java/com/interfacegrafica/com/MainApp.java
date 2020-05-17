@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 
 public class MainApp extends Application {
 
@@ -22,12 +24,32 @@ public class MainApp extends Application {
         
         //Image img = new Image("/Images/Background.jpg");
         //ImageView background = new ImageView(img);
-
+        
         Scene scene = new Scene(root);
 
         stage.setTitle("Automação residencial");
         stage.setScene(scene);
         stage.show();
+
+        new Service<Integer>(){
+            SerialComunication serialComunication = new SerialComunication();
+			@Override
+			protected Task<Integer> createTask() {
+                // TODO Auto-generated method stub
+                
+                return new Task<Integer>() {
+                    @Override
+                    protected Integer call() throws Exception {
+                        while(true){
+                            
+                            serialComunication.VerifyPort();
+                        }
+                    }
+                };
+			}
+
+        }.start();
+
     }
 
     /**
