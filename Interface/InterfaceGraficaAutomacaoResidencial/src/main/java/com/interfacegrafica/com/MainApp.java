@@ -2,6 +2,9 @@ package com.interfacegrafica.com;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+
+import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,43 +15,52 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
+import javafx.event.EventHandler;
+import javafx.event.Event;
 
 public class MainApp extends Application {
 
     private Stage stage;
+    private Parent root;
+    private Scene scene;
 
     @Override
     public void start(Stage PrimaryStage) throws Exception {
+        new Service<Integer>() {
+            SerialComunication serialComunication = new SerialComunication();
+
+            @Override
+            protected Task<Integer> createTask() {
+                // TODO Auto-generated method stub
+
+                return new Task<Integer>() {
+                    @Override
+                    protected Integer call() throws Exception {
+                        while (true) {
+                            serialComunication.ReadValues();
+                        }
+                    }
+                };
+            }
+
+        }.start();
+
         stage = PrimaryStage;
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
-        //Image img = new Image("/Images/Background.jpg");
-        //ImageView background = new ImageView(img);
-        
-        Scene scene = new Scene(root);
+        root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+
+        // Image img = new Image("/Images/Background.jpg");
+        // ImageView background = new ImageView(img);
+
+        scene = new Scene(root);
 
         stage.setTitle("Automação residencial");
         stage.setScene(scene);
         stage.show();
 
-        new Service<Integer>(){
-            SerialComunication serialComunication = new SerialComunication();
-			@Override
-			protected Task<Integer> createTask() {
-                // TODO Auto-generated method stub
-                
-                return new Task<Integer>() {
-                    @Override
-                    protected Integer call() throws Exception {
-                        while(true){
-                            
-                            serialComunication.VerifyPort();
-                        }
-                    }
-                };
-			}
 
-        }.start();
 
     }
 

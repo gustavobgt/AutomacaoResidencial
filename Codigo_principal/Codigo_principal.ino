@@ -11,12 +11,16 @@
 int RECV_PIN = 3;
 bool estado_R1 = 0;
 bool estado_R2 = 0;
+char aux;
+
+boolean statusRele1 = false;
+boolean statusRele2 = false;
+boolean statusRele3 = false;
+
 
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 dht DHT;
-
-char aux;
 
 void setup()
 {
@@ -27,6 +31,8 @@ void setup()
   digitalWrite(RELE_2,LOW);
   pinMode(RELE_3, OUTPUT);
   digitalWrite(RELE_3, LOW);
+
+  pinMode(A0, INPUT); //TEMPORARIO
   
   Serial.begin(9600);
   irrecv.enableIRIn(); //Inicia o receptor
@@ -40,45 +46,33 @@ void loop() {
     aux = Serial.read();
     
   }
-  Serial.println(aux); 
-
   DHT.read11(pinDHT);
-  Serial.println(DHT.humidity);
-  Serial.println(DHT.temperature, 0);
- 
+  //Serial.println(DHT.humidity);
+  //Serial.println(DHT.temperature, 0);
+
+  Serial.println(analogRead(A0));
+  Serial.println(aux);
+  Serial.println(analogRead(A0));
+  Serial.println(" ");
 
   switch(aux){
     case 'a':
-      Serial.println("RELE 1 LIGADO");
-      digitalWrite(RELE_1, HIGH);
+      statusRele1 = !statusRele1;
+      digitalWrite(RELE_1, statusRele1);
       break;
 
     case 'b':
-      Serial.println("RELE 1 DESLIGADO");
-      digitalWrite(RELE_1, LOW);
+      statusRele2 = !statusRele2;
+      digitalWrite(RELE_2, statusRele2);
       break;
 
     case 'c':
-      Serial.println("RELE 2 LIGADO");
-      digitalWrite(RELE_2, HIGH);
-      break;
-
-    case 'd':
-      Serial.println("RELE 2 DESLIGADO");
-      digitalWrite(RELE_2, LOW);
-      break;
-
-    case 'e': 
-      Serial.println("RELE 3 LIGADO");
-      digitalWrite(RELE_3, HIGH);
-      break;
-      
-    case 'f':
-      Serial.println("RELE 3 DESLIGADO");
-      digitalWrite(RELE_3, LOW);
+      statusRele3 = !statusRele3;
+      digitalWrite(RELE_3, statusRele3);
       break;
   }
- 
+
+  aux = 0;
 
   if (irrecv.decode(&results)) {
     Serial.println(results.value, DEC);
