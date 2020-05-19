@@ -72,7 +72,10 @@ public class FXMLController implements Initializable {
     } else {
       btnRelay1Pressed = true;
       imgBtnRelay1.setImage(imgON);
+
     }
+
+    serialComunication.sendValues(1);
 
   }
 
@@ -89,6 +92,8 @@ public class FXMLController implements Initializable {
 
     }
 
+    serialComunication.sendValues(2);
+
   }
 
   @FXML
@@ -103,6 +108,7 @@ public class FXMLController implements Initializable {
       imgBtnRelay3.setImage(imgON);
 
     }
+    serialComunication.sendValues(3);
 
   }
 

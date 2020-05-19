@@ -11,7 +11,7 @@
 int RECV_PIN = 3;
 bool estado_R1 = 0;
 bool estado_R2 = 0;
-char aux;
+int aux;
 
 boolean statusRele1 = false;
 boolean statusRele2 = false;
@@ -50,23 +50,23 @@ void loop() {
   //Serial.println(DHT.humidity);
   //Serial.println(DHT.temperature, 0);
 
-  Serial.println(analogRead(A0));
-  Serial.println(aux);
-  Serial.println(analogRead(A0));
+  Serial.println("50%");
+  Serial.println(" ");
+  Serial.println("32ºC");
   Serial.println(" ");
 
   switch(aux){
-    case 'a':
+    case 1:
       statusRele1 = !statusRele1;
       digitalWrite(RELE_1, statusRele1);
       break;
 
-    case 'b':
+    case 2:
       statusRele2 = !statusRele2;
       digitalWrite(RELE_2, statusRele2);
       break;
 
-    case 'c':
+    case 3:
       statusRele3 = !statusRele3;
       digitalWrite(RELE_3, statusRele3);
       break;

@@ -11,6 +11,9 @@ import jssc.SerialPortException;
 import static jssc.SerialPort.MASK_RXCHAR;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+
+import jssc.SerialPortEventListener;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 
@@ -19,6 +22,8 @@ public class SerialComunication {
     private String port;
     private String[] serialPorts;
     private SerialPort serialPort;
+    private OutputStream serialOut;
+    private static int outputValue = 0;
     
     public SerialComunication(){
         this.serialPorts = SerialPortList.getPortNames();
@@ -37,9 +42,13 @@ public class SerialComunication {
                 SerialPort.STOPBITS_1,
                 SerialPort.PARITY_NONE);
     
-            serialPort.writeByte((byte) 0x01);
+            //serialPort.writeBytes("a".getBytes());
 
-            byte[] buffer = serialPort.readBytes(16);
+            serialPort.addEventListener(new PortReader());
+
+            serialPort.writeInt(1);
+
+            /*byte[] buffer = serialPort.readBytes(16);
             String data = new String(buffer);
 
             System.out.println(data);
@@ -49,7 +58,7 @@ public class SerialComunication {
 
             Constants.setValues(data);
 
-            this.serialPort.closePort();
+            this.serialPort.closePort();*/
 
         } catch (Exception e) {
             // TODO Auto-generated catch block
@@ -58,24 +67,42 @@ public class SerialComunication {
 
     }
 
-    public void sendValues(){
-        try {
-            this.serialPort.openPort();
-            this.serialPort.setParams(
-                SerialPort.BAUDRATE_9600,
-                SerialPort.DATABITS_8,
-                SerialPort.STOPBITS_1,
-                SerialPort.PARITY_NONE);
+    public void sendValues(int value){
+        outputValue = value;
+
+    }
+
     
-            serialPort.writeByte("a".getBytes()[0]);
+class PortReader implements SerialPortEventListener {
 
-            this.serialPort.closePort();
+    @Override
+    public void serialEvent(SerialPortEvent event) {
+        // TODO Auto-generated method stub
+        if(event.isRXCHAR() && event.getEventValue() > 0){
+            try{
+                
+                //byte[] buffer = serialPort.readBytes(16);
+                String data = serialPort.readString();
 
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            System.out.println("PORTA NÃO ENCONTRADA");
+                System.out.println(data);
+
+                serialPort.writeInt(outputValue);
+            
+                Constants.setValues(data);
+
+                outputValue = 0;
+
+            }catch(SerialPortException e){
+                e.printStackTrace();
+            }
         }
 
+
     }
+
+
+
+}
+
 
 }

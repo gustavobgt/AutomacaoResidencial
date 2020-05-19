@@ -29,7 +29,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage PrimaryStage) throws Exception {
-        new Service<Integer>() {
+        /*new Service<Integer>() {
             SerialComunication serialComunication = new SerialComunication();
 
             @Override
@@ -46,7 +46,10 @@ public class MainApp extends Application {
                 };
             }
 
-        }.start();
+        }.start();*/
+
+        SerialComunication serialComunication = new SerialComunication();
+        serialComunication.ReadValues();
 
         stage = PrimaryStage;
         root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
