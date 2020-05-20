@@ -22,7 +22,6 @@ public class SerialComunication {
     private String port;
     private String[] serialPorts;
     private SerialPort serialPort;
-    private OutputStream serialOut;
     private static int outputValue = 0;
     
     public SerialComunication(){
@@ -41,25 +40,9 @@ public class SerialComunication {
                 SerialPort.DATABITS_8,
                 SerialPort.STOPBITS_1,
                 SerialPort.PARITY_NONE);
-    
-            //serialPort.writeBytes("a".getBytes());
 
-            serialPort.addEventListener(new PortReader());
-
-            serialPort.writeInt(1);
-
-            /*byte[] buffer = serialPort.readBytes(16);
-            String data = new String(buffer);
-
-            System.out.println(data);
-
-            //FXMLController layoutController = new FXMLController(); 
-            //layoutController.setValues(Temperature, Humidity);
-
-            Constants.setValues(data);
-
-            this.serialPort.closePort();*/
-
+            serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
+            
         } catch (Exception e) {
             // TODO Auto-generated catch block
             System.out.println("PORTA NÃO ENCONTRADA");
@@ -71,38 +54,38 @@ public class SerialComunication {
         outputValue = value;
 
     }
-
     
-class PortReader implements SerialPortEventListener {
+    private class PortReader implements SerialPortEventListener {
 
-    @Override
-    public void serialEvent(SerialPortEvent event) {
-        // TODO Auto-generated method stub
-        if(event.isRXCHAR() && event.getEventValue() > 0){
-            try{
+        @Override
+        public void serialEvent(SerialPortEvent event) {
+            // TODO Auto-generated method stub
+            if(event.isRXCHAR() && event.getEventValue() > 0){
+                try{
+                    
+                    //byte[] buffer = serialPort.readBytes(16);
+                    String data = serialPort.readString();
+
+                    System.out.println(data);
+
+                    serialPort.writeInt(outputValue);
                 
-                //byte[] buffer = serialPort.readBytes(16);
-                String data = serialPort.readString();
+                    Constants.setValues(data);
 
-                System.out.println(data);
+                    outputValue = 0;
 
-                serialPort.writeInt(outputValue);
-            
-                Constants.setValues(data);
 
-                outputValue = 0;
-
-            }catch(SerialPortException e){
-                e.printStackTrace();
+                }catch(SerialPortException e){
+                    e.printStackTrace();
+                }
             }
+
+
         }
 
 
+
     }
-
-
-
-}
 
 
 }

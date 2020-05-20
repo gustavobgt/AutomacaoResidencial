@@ -13,10 +13,6 @@ bool estado_R1 = 0;
 bool estado_R2 = 0;
 int aux;
 
-boolean statusRele1 = false;
-boolean statusRele2 = false;
-boolean statusRele3 = false;
-
 
 IRrecv irrecv(RECV_PIN);
 decode_results results;
@@ -57,18 +53,27 @@ void loop() {
 
   switch(aux){
     case 1:
-      statusRele1 = !statusRele1;
-      digitalWrite(RELE_1, statusRele1);
+      digitalWrite(RELE_1, HIGH);
       break;
 
     case 2:
-      statusRele2 = !statusRele2;
-      digitalWrite(RELE_2, statusRele2);
+      digitalWrite(RELE_2, HIGH);
       break;
 
     case 3:
-      statusRele3 = !statusRele3;
-      digitalWrite(RELE_3, statusRele3);
+      digitalWrite(RELE_3, HIGH);
+      break;
+      
+    case 4:
+      digitalWrite(RELE_1, LOW);
+      break;
+
+    case 5:
+      digitalWrite(RELE_2, LOW);
+      break;
+
+    case 6:
+      digitalWrite(RELE_3, LOW);
       break;
   }
 

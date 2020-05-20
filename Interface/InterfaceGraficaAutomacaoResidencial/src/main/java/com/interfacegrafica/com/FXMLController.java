@@ -69,13 +69,14 @@ public class FXMLController implements Initializable {
     if (btnRelay1Pressed) {
       imgBtnRelay1.setImage(imgOFF);
       btnRelay1Pressed = false;
+      serialComunication.sendValues(4);
     } else {
       btnRelay1Pressed = true;
       imgBtnRelay1.setImage(imgON);
+      serialComunication.sendValues(1);
 
     }
 
-    serialComunication.sendValues(1);
 
   }
 
@@ -86,13 +87,13 @@ public class FXMLController implements Initializable {
     if (btnRelay2Pressed) {
       imgBtnRelay2.setImage(imgOFF);
       btnRelay2Pressed = false;
+      serialComunication.sendValues(5);
     } else {
       btnRelay2Pressed = true;
       imgBtnRelay2.setImage(imgON);
-
+      serialComunication.sendValues(2);
     }
 
-    serialComunication.sendValues(2);
 
   }
 
@@ -103,17 +104,19 @@ public class FXMLController implements Initializable {
     if (btnRelay3Pressed) {
       imgBtnRelay3.setImage(imgOFF);
       btnRelay3Pressed = false;
+      serialComunication.sendValues(6);
     } else {
       btnRelay3Pressed = true;
       imgBtnRelay3.setImage(imgON);
+      serialComunication.sendValues(3);
 
     }
-    serialComunication.sendValues(3);
 
   }
 
   public void UpdateValues(){
     lblData.setText(Constants.getValues());
   }
-    
+ 
+
 }
