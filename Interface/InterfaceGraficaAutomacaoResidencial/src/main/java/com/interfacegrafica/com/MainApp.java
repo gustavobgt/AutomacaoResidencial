@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
@@ -26,33 +27,16 @@ public class MainApp extends Application {
     private Stage stage;
     private Parent root;
     private Scene scene;
+    private SerialComunication serialComunication;
 
     @Override
     public void start(Stage PrimaryStage) throws Exception {
-        new Service<Integer>() {
-            SerialComunication serialComunication = new SerialComunication();
 
-            @Override
-            protected Task<Integer> createTask() {
-                // TODO Auto-generated method stub
-
-                return new Task<Integer>() {
-                    @Override
-                    protected Integer call() throws Exception {
-                        while (true) {
-                            serialComunication.ReadValues();
-                        }
-                    }
-                };
-            }
-
-        }.start();
+        serialComunication = new SerialComunication();
+        serialComunication.ReadValues();
 
         stage = PrimaryStage;
         root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-
-        // Image img = new Image("/Images/Background.jpg");
-        // ImageView background = new ImageView(img);
 
         scene = new Scene(root);
 
@@ -60,7 +44,18 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
 
+            @Override
+            public void handle(WindowEvent event) {
+                // TODO Auto-generated method stub
+                event.consume();
+
+                stage.close();
+                System.exit(0);
+            }
+
+        });
 
     }
 
