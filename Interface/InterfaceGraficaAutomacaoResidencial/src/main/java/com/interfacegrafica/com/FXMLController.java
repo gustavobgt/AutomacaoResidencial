@@ -2,19 +2,18 @@ package com.interfacegrafica.com;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import javafx.event.EventHandler;
 
 public class FXMLController implements Initializable {
 
@@ -25,8 +24,6 @@ public class FXMLController implements Initializable {
   Image imgOFF = new Image("/Images/Botão Desligado.png");
   Image imgON = new Image("/Images/Botão Ligado.png");
 
-  SerialComunication serialComunication = new SerialComunication();
-
   @FXML
   private ImageView imgBtnRelay1;
   @FXML
@@ -35,14 +32,22 @@ public class FXMLController implements Initializable {
   private ImageView imgBtnRelay3;
   @FXML
   private Label lblData;
+  @FXML
+  private Label lblPort;
 
+  SerialComunication serialComunication;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
     
+    serialComunication = new SerialComunication();
+    lblPort.setText(serialComunication.getPort());
+
     //lblHumidity.setText(Constants.getHumidity());
     //lblTemperature.setText(Constants.getTemperature());
     //new MainApp().UpdateScene();
+
+
             
     EventHandler handler = new EventHandler(){
     @Override
@@ -61,6 +66,12 @@ public class FXMLController implements Initializable {
 
 
   }
+
+  @FXML
+  private void Init(ActionEvent Event){
+    serialComunication.ReadValues();
+  }
+
 
   @FXML
   private void btnRelay1(ActionEvent Event) {

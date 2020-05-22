@@ -1,21 +1,11 @@
 package com.interfacegrafica.com;
 
-/*import gnu.io.CommPortIdentifier;
-import gnu.io.NoSuchPortException;
-import gnu.io.SerialPort;*/
-import jssc.SerialPortList;
 import jssc.SerialPort;
 import jssc.SerialPortEvent;
-import jssc.SerialPortException;
-
-import static jssc.SerialPort.MASK_RXCHAR;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-
 import jssc.SerialPortEventListener;
+import jssc.SerialPortException;
+import jssc.SerialPortList;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
 
 
 public class SerialComunication {
@@ -23,6 +13,7 @@ public class SerialComunication {
     private String[] serialPorts;
     private SerialPort serialPort;
     private static int outputValue = 0;
+    
     
     public SerialComunication(){
         this.serialPorts = SerialPortList.getPortNames();
@@ -35,14 +26,19 @@ public class SerialComunication {
         try {
             
             this.serialPort.openPort();
-            this.serialPort.setParams(
-                SerialPort.BAUDRATE_9600,
-                SerialPort.DATABITS_8,
-                SerialPort.STOPBITS_1,
-                SerialPort.PARITY_NONE);
+            this.serialPort.setParams(9600, 8, 1, 0);
 
-            serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
-            
+            String data = serialPort.readString();
+
+            System.out.println(data);
+
+            serialPort.writeInt(outputValue);
+                
+            Constants.setValues(data);
+
+            outputValue = 0;
+
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             System.out.println("PORTA NÃO ENCONTRADA");
@@ -54,8 +50,12 @@ public class SerialComunication {
         outputValue = value;
 
     }
+
+    public String getPort(){
+        return this.serialPort.getPortName();
+    }
     
-    private class PortReader implements SerialPortEventListener {
+    /*private class PortReader implements SerialPortEventListener {
 
         @Override
         public void serialEvent(SerialPortEvent event) {
@@ -85,7 +85,7 @@ public class SerialComunication {
 
 
 
-    }
+    }*/
 
 
 }

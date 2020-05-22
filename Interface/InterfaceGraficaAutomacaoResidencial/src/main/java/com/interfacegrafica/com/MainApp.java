@@ -1,26 +1,12 @@
 package com.interfacegrafica.com;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-
-import java.io.IOException;
-
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
-import javafx.event.EventHandler;
-import javafx.event.Event;
 
 public class MainApp extends Application {
 
@@ -31,9 +17,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage PrimaryStage) throws Exception {
-
-        serialComunication = new SerialComunication();
-        serialComunication.ReadValues();
 
         stage = PrimaryStage;
         root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
@@ -56,7 +39,7 @@ public class MainApp extends Application {
             }
 
         });
-
+        
     }
 
     /**

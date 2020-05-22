@@ -72,5 +72,15 @@
             <Font name="Impact" size="36.0" />
          </font>
       </Label>
+      <Button layoutX="117.0" layoutY="542.0" mnemonicParsing="false" onAction="#Init" prefHeight="71.0" prefWidth="226.0" text="Iniciar comunicação serial">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblPort" layoutX="173.0" layoutY="488.0" prefHeight="30.0" prefWidth="82.0" text="PORTA">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
