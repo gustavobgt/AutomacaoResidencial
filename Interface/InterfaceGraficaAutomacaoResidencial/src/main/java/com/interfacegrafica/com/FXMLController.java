@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import jssc.SerialPortException;
 
 public class FXMLController implements Initializable {
 
@@ -39,8 +40,9 @@ public class FXMLController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    
+
     serialComunication = new SerialComunication();
+
     lblPort.setText(serialComunication.getPort());
 
     //lblHumidity.setText(Constants.getHumidity());
@@ -68,7 +70,7 @@ public class FXMLController implements Initializable {
   }
 
   @FXML
-  private void Init(ActionEvent Event){
+  private void Init(ActionEvent Event) throws SerialPortException {
     serialComunication.ReadValues();
   }
 

@@ -1,8 +1,7 @@
+com\interfacegrafica\com\MainApp.class
+com\interfacegrafica\com\SerialComunication.class
+com\interfacegrafica\com\MainApp$1.class
 com\interfacegrafica\com\Constants.class
 com\interfacegrafica\com\FXMLController.class
 com\interfacegrafica\com\SerialComunication$PortReader.class
 com\interfacegrafica\com\FXMLController$1.class
-com\interfacegrafica\com\MainApp.class
-com\interfacegrafica\com\SerialComunication.class
-com\interfacegrafica\com\MainApp$1.class
-com\interfacegrafica\com\SerialComunication$1.class

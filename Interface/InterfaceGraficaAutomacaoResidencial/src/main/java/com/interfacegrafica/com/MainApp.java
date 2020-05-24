@@ -7,14 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.concurrent.*;
 
 public class MainApp extends Application {
 
     private Stage stage;
     private Parent root;
     private Scene scene;
-    private SerialComunication serialComunication;
-
+    
     @Override
     public void start(Stage PrimaryStage) throws Exception {
 
@@ -39,7 +39,25 @@ public class MainApp extends Application {
             }
 
         });
-        
+
+        new Service<Integer>() {
+			@Override
+			protected Task<Integer> createTask() {
+                // TODO Auto-generated method stub
+            	return new Task<Integer>(){
+
+					@Override
+					protected Integer call() throws Exception {
+                        // TODO Auto-generated method stub
+                        SerialComunication connection = new SerialComunication();
+                        while(true){
+                            connection.ReadValues();
+                        }
+					}
+                };
+            }
+        }.start();
+
     }
 
     /**
