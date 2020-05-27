@@ -32,7 +32,9 @@ public class FXMLController implements Initializable {
   @FXML
   private ImageView imgBtnRelay3;
   @FXML
-  private Label lblData;
+  private Label lblHumidity;
+  @FXML
+  private Label lblTemperature;
   @FXML
   private Label lblPort;
 
@@ -40,21 +42,24 @@ public class FXMLController implements Initializable {
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
+    try{
+      serialComunication = new SerialComunication();
 
-    serialComunication = new SerialComunication();
 
-    lblPort.setText(serialComunication.getPort());
+    }catch(Exception e){
+      System.out.println("ERRO AQUI");
+    }
 
     //lblHumidity.setText(Constants.getHumidity());
     //lblTemperature.setText(Constants.getTemperature());
-    //new MainApp().UpdateScene();
 
 
             
-    EventHandler handler = new EventHandler(){
+    /*EventHandler handler = new EventHandler(){
     @Override
     public void handle(Event event) {
     // TODO Auto-generated method stub
+        serialComunication.ReadValues();
         UpdateValues();
       }
 
@@ -64,14 +69,20 @@ public class FXMLController implements Initializable {
     Timeline timeline = new Timeline();
     timeline.getKeyFrames().add(frame);
     timeline.setCycleCount(Timeline.INDEFINITE);
-    timeline.play();
+    timeline.play();*/
 
 
   }
 
   @FXML
   private void Init(ActionEvent Event) throws SerialPortException {
-    serialComunication.ReadValues();
+    try{
+      serialComunication.ReadValues();
+      UpdateValues();
+    }catch(Exception e){
+      System.out.println("ERRO AQUI");
+    }
+
   }
 
 
@@ -128,8 +139,9 @@ public class FXMLController implements Initializable {
   }
 
   public void UpdateValues(){
-    lblData.setText(Constants.getValues());
+    lblTemperature.setText(Constants.getTemperature());
+    lblHumidity.setText(Constants.getHumidity());
+    lblPort.setText(Constants.getPort());
   }
- 
 
 }

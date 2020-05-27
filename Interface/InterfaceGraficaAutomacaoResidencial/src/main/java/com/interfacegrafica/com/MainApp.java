@@ -27,37 +27,12 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setOnCloseRequest(new EventHandler<WindowEvent>(){
+        
+    }
 
-            @Override
-            public void handle(WindowEvent event) {
-                // TODO Auto-generated method stub
-                event.consume();
-
-                stage.close();
-                System.exit(0);
-            }
-
-        });
-
-        new Service<Integer>() {
-			@Override
-			protected Task<Integer> createTask() {
-                // TODO Auto-generated method stub
-            	return new Task<Integer>(){
-
-					@Override
-					protected Integer call() throws Exception {
-                        // TODO Auto-generated method stub
-                        SerialComunication connection = new SerialComunication();
-                        while(true){
-                            connection.ReadValues();
-                        }
-					}
-                };
-            }
-        }.start();
-
+    public void updateScene(){
+        stage.setScene(scene);
+        stage.show();
     }
 
     /**

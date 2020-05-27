@@ -1,4 +1,10 @@
-package com.interfacegrafica.com;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.interfacegrafica;
+
 
 import gnu.io.SerialPort;
 import gnu.io.UnsupportedCommOperationException;
@@ -21,7 +27,7 @@ import gnu.io.SerialPortEventListener;
 import jssc.SerialPortException;
 import jssc.SerialPortList;
 
-public class SerialComunication /*implements SerialPortEventListener*/{
+public class SerialComunication implements SerialPortEventListener{
     private String port;
     private String[] serialPorts;
     private SerialPort serialPort;
@@ -29,8 +35,7 @@ public class SerialComunication /*implements SerialPortEventListener*/{
     private CommPortIdentifier portId;
     private OutputStream serialOut;
     private BufferedReader serialIn;
-	private SerialPortEvent event;
-    private FXMLController controller;
+   private SerialPortEvent event;
 
     public SerialComunication() {
 
@@ -50,15 +55,15 @@ public class SerialComunication /*implements SerialPortEventListener*/{
     }
 
     public void ReadValues() {
-        /*try {
+        try {
             this.serialPort.addEventListener(this);
             serialPort.notifyOnDataAvailable(true);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }*/
+        }
 
-        String responseHumidity;
+        /*String responseHumidity;
         String responseTemperature;
         try {
             responseHumidity = this.serialIn.readLine();
@@ -73,7 +78,7 @@ public class SerialComunication /*implements SerialPortEventListener*/{
         } catch (Exception e) {
             this.serialPort.close();
             this.port = "ARDUINO NÃO ENCONTRADO";
-        }
+        }*/
     
 
 
@@ -92,15 +97,11 @@ public class SerialComunication /*implements SerialPortEventListener*/{
 
     }
 
-    public String getPort() {
-        return this.port;
-    }
-
-    /*@Override
+    @Override
     public void serialEvent(SerialPortEvent event) {
         // TODO Auto-generated method stub
 
-		try{
+       try{
             if (event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
                 String responseHumidity;
                 String responseTemperature;
@@ -124,7 +125,7 @@ public class SerialComunication /*implements SerialPortEventListener*/{
             }
         }catch(Exception e){
         }
-    }*/
+    }
 
 
 }
