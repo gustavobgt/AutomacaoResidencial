@@ -47,9 +47,7 @@ void loop() {
   //Serial.println(DHT.temperature, 0);
 
   Serial.println("50%");
-  Serial.println(" ");
   Serial.println("32ºC");
-  Serial.println(" ");
 
   switch(aux){
     case 1:

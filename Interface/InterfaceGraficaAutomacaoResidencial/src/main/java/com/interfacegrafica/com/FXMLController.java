@@ -2,19 +2,19 @@ package com.interfacegrafica.com;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.concurrent.Service;
-import javafx.concurrent.Task;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
-import javafx.event.EventHandler;
+import jssc.SerialPortException;
 
 public class FXMLController implements Initializable {
 
@@ -25,8 +25,6 @@ public class FXMLController implements Initializable {
   Image imgOFF = new Image("/Images/Botão Desligado.png");
   Image imgON = new Image("/Images/Botão Ligado.png");
 
-  SerialComunication serialComunication = new SerialComunication();
-
   @FXML
   private ImageView imgBtnRelay1;
   @FXML
@@ -34,20 +32,34 @@ public class FXMLController implements Initializable {
   @FXML
   private ImageView imgBtnRelay3;
   @FXML
-  private Label lblData;
+  private Label lblHumidity;
+  @FXML
+  private Label lblTemperature;
+  @FXML
+  private Label lblPort;
 
+  SerialComunication serialComunication;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {
-    
+    try{
+      serialComunication = new SerialComunication();
+
+
+    }catch(Exception e){
+      System.out.println("ERRO AQUI");
+    }
+
     //lblHumidity.setText(Constants.getHumidity());
     //lblTemperature.setText(Constants.getTemperature());
-    //new MainApp().UpdateScene();
+
+
             
-    EventHandler handler = new EventHandler(){
+    /*EventHandler handler = new EventHandler(){
     @Override
     public void handle(Event event) {
     // TODO Auto-generated method stub
+        serialComunication.ReadValues();
         UpdateValues();
       }
 
@@ -57,10 +69,22 @@ public class FXMLController implements Initializable {
     Timeline timeline = new Timeline();
     timeline.getKeyFrames().add(frame);
     timeline.setCycleCount(Timeline.INDEFINITE);
-    timeline.play();
+    timeline.play();*/
 
 
   }
+
+  @FXML
+  private void Init(ActionEvent Event) throws SerialPortException {
+    try{
+      serialComunication.ReadValues();
+      UpdateValues();
+    }catch(Exception e){
+      System.out.println("ERRO AQUI");
+    }
+
+  }
+
 
   @FXML
   private void btnRelay1(ActionEvent Event) {
@@ -115,8 +139,9 @@ public class FXMLController implements Initializable {
   }
 
   public void UpdateValues(){
-    lblData.setText(Constants.getValues());
+    lblTemperature.setText(Constants.getTemperature());
+    lblHumidity.setText(Constants.getHumidity());
+    lblPort.setText(Constants.getPort());
   }
- 
 
 }
