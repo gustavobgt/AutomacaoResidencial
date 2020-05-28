@@ -43,11 +43,11 @@ void loop() {
     
   }
   DHT.read11(pinDHT);
-  //Serial.println(DHT.humidity);
-  //Serial.println(DHT.temperature, 0);
+  Serial.println(DHT.humidity);
+  Serial.println(DHT.temperature, 0);
 
-  Serial.println("50%");
-  Serial.println("32ºC");
+  //Serial.println("50%");
+  //Serial.println("32ºC");
 
   switch(aux){
     case 1:
