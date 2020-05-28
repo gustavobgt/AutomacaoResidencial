@@ -1,0 +1,4 @@
+com\interfacegrafica\com\MainApp.class
+com\interfacegrafica\com\SerialComunication.class
+com\interfacegrafica\com\Constants.class
+com\interfacegrafica\com\FXMLController.class

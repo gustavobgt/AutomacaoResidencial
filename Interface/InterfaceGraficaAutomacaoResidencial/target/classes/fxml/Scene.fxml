@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="Pane" minHeight="720.0" prefHeight="720.0" prefWidth="1280.0000999999975" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.interfacegrafica.com.FXMLController">
+   <children>
+      <Label layoutX="412.0" layoutY="27.0" text="AUTOMAÇÃO RESIDENCIAL">
+         <font>
+            <Font name="Impact" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="360.0" text="Temperatura: ">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="97.0" layoutY="289.0" text="Umidade:">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblHumidity" layoutX="343.0" layoutY="285.0" prefHeight="53.0" prefWidth="139.0" text="0">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <ToggleButton layoutX="768.0" layoutY="170.0" mnemonicParsing="false" onAction="#btnRelay1" prefHeight="116.0" prefWidth="206.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fx:id="imgBtnRelay1" fitHeight="122.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Botão%20Desligado.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton layoutX="768.0" layoutY="505.0" mnemonicParsing="false" onAction="#btnRelay3" prefHeight="116.0" prefWidth="206.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fx:id="imgBtnRelay3" fitHeight="122.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Botão%20Desligado.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <ToggleButton layoutX="768.0" layoutY="335.0" mnemonicParsing="false" onAction="#btnRelay2" prefHeight="116.0" prefWidth="206.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fx:id="imgBtnRelay2" fitHeight="122.0" fitWidth="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Botão%20Desligado.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </ToggleButton>
+      <Label layoutX="987.0" layoutY="213.0" text="RELÊ 1 ">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="988.0" layoutY="378.0" text="RELÊ 2">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="987.0" layoutY="555.0" text="RELÊ 3">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Button layoutX="97.0" layoutY="535.0" mnemonicParsing="false" onAction="#Init" prefHeight="71.0" prefWidth="226.0" text="Iniciar comunicação serial">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="lblPort" layoutX="157.0" layoutY="140.0" prefHeight="30.0" prefWidth="197.0" text="ARDUINO NÃO ENCONTRADO">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTemperature" layoutX="343.0" layoutY="356.0" prefHeight="53.0" prefWidth="139.0" text="0">
+         <font>
+            <Font name="Impact" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblPort1" layoutX="97.0" layoutY="140.0" prefHeight="30.0" prefWidth="60.0" text="PORTA:">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
